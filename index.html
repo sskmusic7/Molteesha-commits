@@ -5,143 +5,261 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base target="_top">
     <title>Sign Up - Playbook MPR</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #0a0a0a;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #000000;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 20px;
+            position: relative;
+            overflow-x: hidden;
         }
+
         body::before {
             content: '';
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background-image:
-                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
             pointer-events: none;
             z-index: 1;
         }
+
         .container {
-            background: rgba(20,20,20,0.95);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 16px;
-            box-shadow: 0 25px 80px rgba(0,0,0,0.5);
-            max-width: 600px;
+            background: rgba(10, 10, 10, 0.98);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px;
+            box-shadow: 0 30px 100px rgba(0,0,0,0.8);
+            max-width: 540px;
             width: 100%;
             position: relative;
             z-index: 2;
+            backdrop-filter: blur(20px);
         }
+
         .header {
-            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            background: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
             color: white;
-            padding: 50px 40px;
+            padding: 50px 45px;
             text-align: center;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            position: relative;
+            overflow: hidden;
         }
-        .logo-icon {
-            font-size: 48px;
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00D9FF, transparent);
         }
-        .header h1 { font-size: 28px; font-weight: 700; margin-bottom: 12px; }
-        .header p { font-size: 15px; opacity: 0.8; }
-        .form { padding: 45px 40px; }
-        .form-group { margin-bottom: 28px; }
+
+        .logo-img {
+            max-width: 180px;
+            height: auto;
+            margin: 0 auto 24px;
+            display: block;
+            filter: brightness(0) invert(1);
+            opacity: 0.95;
+        }
+
+        .header h1 {
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+            color: #ffffff;
+        }
+
+        .header p {
+            font-size: 14px;
+            font-weight: 400;
+            color: rgba(255,255,255,0.5);
+            line-height: 1.6;
+        }
+
+        .form { padding: 40px 45px; }
+
+        .form-group { margin-bottom: 24px; }
+
         .form-group label {
             display: block;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
-            color: #fff;
-            margin-bottom: 10px;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 8px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.2px;
         }
+
         .input-wrapper { position: relative; }
+
         .input-wrapper i {
             position: absolute;
             left: 16px;
             top: 50%;
             transform: translateY(-50%);
-            color: #667eea;
-            font-size: 16px;
-        }
-        .form-group input, .form-group select {
-            width: 100%;
-            padding: 16px 16px 16px 48px;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 8px;
+            color: #00D9FF;
             font-size: 15px;
-            color: #fff;
+            opacity: 0.6;
         }
-        .form-group input:focus, .form-group select:focus {
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 14px 16px 14px 46px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 10px;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            color: #ffffff;
+            transition: all 0.2s ease;
+        }
+
+        .form-group input::placeholder {
+            color: rgba(255,255,255,0.3);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
             outline: none;
-            border-color: #667eea;
-            background: rgba(255,255,255,0.08);
-            box-shadow: 0 0 0 4px rgba(102,126,234,0.15);
+            border-color: #00D9FF;
+            background: rgba(0, 217, 255, 0.03);
+            box-shadow: 0 0 0 3px rgba(0, 217, 255, 0.08);
         }
+
+        .form-group input:focus + i,
+        .form-group select:focus + i {
+            opacity: 1;
+        }
+
         .form-group select {
             cursor: pointer;
             appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23667eea' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='%2300D9FF' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
             background-repeat: no-repeat;
             background-position: right 16px center;
         }
+
+        .form-group select option {
+            background: #0a0a0a;
+            color: #ffffff;
+        }
+
         .submit-btn {
             width: 100%;
-            padding: 18px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
+            padding: 16px;
+            background: #00D9FF;
+            color: #000000;
             border: none;
-            border-radius: 8px;
-            font-size: 16px;
+            border-radius: 10px;
+            font-size: 14px;
             font-weight: 600;
+            font-family: 'Inter', sans-serif;
             cursor: pointer;
-            margin-top: 12px;
+            margin-top: 8px;
             text-transform: uppercase;
+            letter-spacing: 0.8px;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
         }
-        .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 15px 35px rgba(102,126,234,0.4); }
-        .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+        .submit-btn:hover {
+            background: #00c8f0;
+            transform: translateY(-1px);
+            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.25);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
         .message {
-            padding: 16px 20px;
-            border-radius: 8px;
+            padding: 14px 18px;
+            border-radius: 10px;
             margin-bottom: 24px;
+            font-size: 13px;
             text-align: center;
             display: none;
+            font-weight: 500;
         }
+
         .message.success {
-            background: rgba(39,174,96,0.15);
-            color: #27ae60;
-            border: 1px solid rgba(39,174,96,0.3);
+            background: rgba(0, 217, 255, 0.1);
+            color: #00D9FF;
+            border: 1px solid rgba(0, 217, 255, 0.2);
         }
+
         .message.error {
-            background: rgba(231,76,60,0.15);
-            color: #e74c3c;
-            border: 1px solid rgba(231,76,60,0.3);
+            background: rgba(255, 59, 48, 0.1);
+            color: #ff3b30;
+            border: 1px solid rgba(255, 59, 48, 0.2);
         }
+
         .footer {
             text-align: center;
-            padding: 25px;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            padding: 24px;
+            border-top: 1px solid rgba(255,255,255,0.06);
         }
-        .footer p { color: rgba(255,255,255,0.5); font-size: 13px; }
-        .footer a { color: #667eea; text-decoration: none; }
+
+        .footer p {
+            color: rgba(255,255,255,0.3);
+            font-size: 12px;
+            font-weight: 400;
+        }
+
+        .footer a {
+            color: #00D9FF;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .footer a:hover {
+            color: #00c8f0;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                border-radius: 0;
+                max-width: 100%;
+            }
+            .header { padding: 40px 30px; }
+            .form { padding: 35px 30px; }
+            .header h1 { font-size: 22px; }
+            .logo-img { max-width: 140px; }
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <div class="logo-icon"><i class="fa-solid fa-rocket"></i></div>
-            <h1>Sign Up - Playbook MPR</h1>
+            <img src="images/white logo.png" alt="Playbook MPR Logo" class="logo-img" onerror="this.style.display='none'">
+            <h1>Sign Up</h1>
             <p>Get exclusive updates and insights delivered to your inbox.</p>
         </div>
         <form id="signup-form" class="form">
@@ -190,27 +308,27 @@
             </button>
         </form>
         <div class="footer">
-            <p>Powered by <a href="https://playbookmpr.com" target="_blank">Playbook MPR</a></p>
+            <p>Powered by <a href="https://playbookmpr.com" target="_blank">Playbook MPR</a> · Creative Solutions</p>
         </div>
     </div>
     <script>
         const form = document.getElementById('signup-form');
         const submitBtn = document.getElementById('submit-btn');
         const messageDiv = document.getElementById('message');
-        
+
         form.addEventListener('submit', function(e) {
             e.preventDefault();
             const name = document.getElementById('name').value.trim();
             const email = document.getElementById('email').value.trim();
-            
+
             if (!name || !email) {
                 showMessage('Please fill in all required fields', 'error');
                 return;
             }
-            
+
             submitBtn.disabled = true;
             submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Submitting...';
-            
+
             google.script.run
                 .withSuccessHandler(function(response) {
                     if (response.status === 'success') {
@@ -234,7 +352,7 @@
                     interest: document.getElementById('interest').value
                 });
         });
-        
+
         function showMessage(text, type) {
             messageDiv.textContent = text;
             messageDiv.className = 'message ' + type;
