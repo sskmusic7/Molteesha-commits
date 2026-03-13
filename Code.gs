@@ -1,14 +1,17 @@
 // Google Apps Script for Playbook MPR Sign Up Form
-// This script handles form submissions and writes them to Google Sheets
+// This script serves the HTML form and handles submissions
 
 // CONFIGURATION
-// The sheet name where data will be stored
 const SHEET_NAME = 'Signups';
 
-function doGet(e) {
-  return HtmlService.createHtmlOutput('Form is running. Use POST to submit data.');
+// Serve the HTML form
+function doGet() {
+  return HtmlService.createHtmlOutputFromFile('Index')
+    .setTitle('Sign Up - Playbook MPR')
+    .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
 }
 
+// Handle form submission
 function doPost(e) {
   try {
     // Get the spreadsheet
@@ -84,6 +87,61 @@ function doPost(e) {
       status: 'error',
       message: error.toString()
     })).setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+// Handle form submission from the served HTML page
+function submitForm(formData) {
+  try {
+    const ss = SpreadsheetApp.getActiveSpreadsheet();
+    let sheet = ss.getSheetByName(SHEET_NAME);
+
+    // Create sheet if it doesn't exist
+    if (!sheet) {
+      sheet = ss.insertSheet(SHEET_NAME);
+      sheet.appendRow(['Timestamp', 'Name', 'Email', 'Phone', 'Interest']);
+      sheet.setFrozenRows(1);
+      sheet.getRange(1, 1, 1, 5).setFontWeight('bold').setBackground('#667eea').setFontColor('white');
+      sheet.autoResizeColumns(1, 5);
+    }
+
+    // Append data to sheet
+    sheet.appendRow([
+      new Date(),
+      formData.name,
+      formData.email,
+      formData.phone,
+      formData.interest
+    ]);
+
+    // Send email notification
+    try {
+      MailApp.sendEmail({
+        to: 'contact@playbookmpr.com',
+        subject: 'New Signup: ' + formData.name,
+        htmlBody: `
+          <h2>New Signup Received</h2>
+          <p><strong>Name:</strong> ${formData.name}</p>
+          <p><strong>Email:</strong> ${formData.email}</p>
+          <p><strong>Phone:</strong> ${formData.phone}</p>
+          <p><strong>Interest:</strong> ${formData.interest}</p>
+          <p><strong>Timestamp:</strong> ${new Date()}</p>
+        `
+      });
+    } catch (emailError) {
+      console.log('Email notification failed:', emailError);
+    }
+
+    return {
+      status: 'success',
+      message: 'Thank you for signing up! You\'ll hear from us soon.'
+    };
+
+  } catch (error) {
+    return {
+      status: 'error',
+      message: 'Something went wrong. Please try again.'
+    };
   }
 }
 
