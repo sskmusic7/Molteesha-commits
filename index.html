@@ -1,83 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base target="_top">
     <title>Sign Up - Playbook MPR</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: #000000;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 20px;
-            position: relative;
-            overflow-x: hidden;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image:
-                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-            background-size: 60px 60px;
-            pointer-events: none;
-            z-index: 1;
         }
 
         .container {
-            background: rgba(10, 10, 10, 0.98);
-            border: 1px solid rgba(255,255,255,0.08);
+            background: #0a0a0a;
+            border: 1px solid #1a1a1a;
             border-radius: 20px;
             box-shadow: 0 30px 100px rgba(0,0,0,0.8);
             max-width: 540px;
             width: 100%;
-            position: relative;
-            z-index: 2;
-            backdrop-filter: blur(20px);
         }
 
         .header {
-            background: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
-            color: white;
+            background: #111111;
             padding: 50px 45px;
             text-align: center;
-            border-bottom: 1px solid rgba(255,255,255,0.06);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .header::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #00D9FF, transparent);
+            border-bottom: 2px solid #00D9FF;
+            border-radius: 20px 20px 0 0;
         }
 
         .logo-text {
             font-size: 42px;
             font-weight: 800;
             margin-bottom: 20px;
-            letter-spacing: -1px;
             background: linear-gradient(135deg, #ffffff 0%, #00D9FF 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
+            letter-spacing: -1px;
         }
 
         .logo-text span {
@@ -85,41 +54,46 @@
             font-size: 14px;
             font-weight: 600;
             letter-spacing: 4px;
-            color: rgba(255,255,255,0.5);
+            color: #666;
             margin-top: -5px;
-            -webkit-text-fill-color: rgba(255,255,255,0.5);
+            -webkit-text-fill-color: #666;
         }
 
         .header h1 {
             font-size: 26px;
             font-weight: 700;
+            color: #ffffff;
             margin-bottom: 10px;
             letter-spacing: -0.5px;
-            color: #ffffff;
         }
 
         .header p {
             font-size: 14px;
-            font-weight: 400;
-            color: rgba(255,255,255,0.5);
+            color: #888;
             line-height: 1.6;
         }
 
-        .form { padding: 40px 45px; }
+        .form {
+            padding: 40px 45px;
+        }
 
-        .form-group { margin-bottom: 24px; }
+        .form-group {
+            margin-bottom: 24px;
+        }
 
         .form-group label {
             display: block;
             font-size: 12px;
             font-weight: 600;
-            color: rgba(255,255,255,0.7);
+            color: #999;
             margin-bottom: 8px;
             text-transform: uppercase;
             letter-spacing: 1.2px;
         }
 
-        .input-wrapper { position: relative; }
+        .input-wrapper {
+            position: relative;
+        }
 
         .input-wrapper i {
             position: absolute;
@@ -128,37 +102,31 @@
             transform: translateY(-50%);
             color: #00D9FF;
             font-size: 15px;
-            opacity: 0.6;
         }
 
         .form-group input,
         .form-group select {
             width: 100%;
             padding: 14px 16px 14px 46px;
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.08);
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
             border-radius: 10px;
             font-size: 14px;
             font-family: 'Inter', sans-serif;
-            font-weight: 400;
             color: #ffffff;
             transition: all 0.2s ease;
         }
 
         .form-group input::placeholder {
-            color: rgba(255,255,255,0.3);
+            color: #555;
         }
 
         .form-group input:focus,
         .form-group select:focus {
             outline: none;
             border-color: #00D9FF;
-            background: rgba(0, 217, 255, 0.03);
-            box-shadow: 0 0 0 3px rgba(0, 217, 255, 0.08);
-        }
-
-        .input-wrapper:focus-within i {
-            opacity: 1;
+            background: #1a1a1a;
+            box-shadow: 0 0 0 3px rgba(0, 217, 255, 0.1);
         }
 
         .form-group select {
@@ -170,7 +138,7 @@
         }
 
         .form-group select option {
-            background: #0a0a0a;
+            background: #1a1a1a;
             color: #ffffff;
         }
 
@@ -189,8 +157,6 @@
             text-transform: uppercase;
             letter-spacing: 0.8px;
             transition: all 0.2s ease;
-            position: relative;
-            overflow: hidden;
         }
 
         .submit-btn:hover {
@@ -199,14 +165,9 @@
             box-shadow: 0 10px 30px rgba(0, 217, 255, 0.25);
         }
 
-        .submit-btn:active {
-            transform: translateY(0);
-        }
-
         .submit-btn:disabled {
             opacity: 0.5;
             cursor: not-allowed;
-            transform: none;
         }
 
         .message {
@@ -222,36 +183,31 @@
         .message.success {
             background: rgba(0, 217, 255, 0.1);
             color: #00D9FF;
-            border: 1px solid rgba(0, 217, 255, 0.2);
+            border: 1px solid rgba(0, 217, 255, 0.3);
         }
 
         .message.error {
             background: rgba(255, 59, 48, 0.1);
             color: #ff3b30;
-            border: 1px solid rgba(255, 59, 48, 0.2);
+            border: 1px solid rgba(255, 59, 48, 0.3);
         }
 
         .footer {
             text-align: center;
             padding: 24px;
-            border-top: 1px solid rgba(255,255,255,0.06);
+            border-top: 1px solid #1a1a1a;
+            border-radius: 0 0 20px 20px;
         }
 
         .footer p {
-            color: rgba(255,255,255,0.3);
+            color: #555;
             font-size: 12px;
-            font-weight: 400;
         }
 
         .footer a {
             color: #00D9FF;
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.2s ease;
-        }
-
-        .footer a:hover {
-            color: #00c8f0;
         }
 
         @media (max-width: 600px) {
